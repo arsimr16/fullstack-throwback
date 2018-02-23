@@ -4,8 +4,6 @@ function assert (actual, expected) {
   }
 }
 
-console.log("Delete this console log!")
-
 // Exercise #1
 //
 // Use find, filter, and map to abstract away all the
@@ -19,48 +17,27 @@ console.log("[Exercise #1]")
 function findDominatingAliceGameScores () {
 
   // First find alice
-  var alice = null
-
-  for (var i=0; i < Data.players.length; i++) {
-    if ( Data.players[i].name === 'Alice' ) {
-      alice = Data.players[i]
-      break;
-    }
-  }
-
-  // Solution, to get you started:
-  /*
   var alice = Data.players.find(function hasNameAlice(person){
      return person.name === 'Alice';
   });
-  */
 
-  // Next, find all games where alice won
-  var aliceGames = []
-
-  for (var i=0; i < Data.games.length; i++) {
-    var game = Data.games[i]
-    if (
-         game.player1_id === alice.id && game.player1_score === 100
-      || game.player2_id === alice.id && game.player2_score === 100
-    ) {
-      aliceGames.push(game)
-    }
-  }
+  // Next, find all games where Alice won
+  var aliceGames = Data.games.filter(game => {
+    return game.player1_id === alice.id && game.player1_score === 100 ||
+      game.player2_id === alice.id && game.player2_score === 100;
+  });
 
   // Next, filter for dominating games and add differences
-  var dominating = []
-
-  for (var i=0; i < aliceGames.length; i++) {
-    var game = aliceGames[i]
-    var difference = Math.abs(game.player1_score - game.player2_score)
-    if ( difference >= 50 ) {
-      dominating.push( difference )
-    }
-  }
+  var dominating = aliceGames.map(game => {
+    var difference = Math.abs(game.player1_score - game.player2_score);
+    return difference;
+  }).filter(difference => {
+    return difference >= 50;
+  });
 
   return dominating.sort()
 }
+
 
 
 // Tests
@@ -85,12 +62,21 @@ console.log("All good!");
 //      hasNameAlice({ id: 11, name: 'Bob'   }) //=> false
 
 function findDominatingAliceGameScores2 () {
-  // TODO: Copy/paste the code you wrote in Exercise #1
+
+  var alice = Data.players.find(propEq('name', 'Alice'));
+
+  var aliceGames = Data.games.filter(isWinningGameFor(alice.id));
+
+  var dominating = aliceGames
+    .map(game => toPlayerScoreDifference(game))
+    .filter(amount => greaterThanOrEqualTo(amount));
+
+  return dominating.sort()
 }
 
-function hasName (name) {
+function propEq (prop, val) {
   return function (person) {
-    return person.name === name;
+    return person[prop] === val;
   };
 }
 
@@ -106,7 +92,7 @@ function toPlayerScoreDifference (game) {
 }
 
 function greaterThanOrEqualTo (amount) {
-  // TODO: Implement this function, curry-style.
+  return amount >= 50;
 }
 
 console.log("[Exercise #2]")
@@ -133,18 +119,37 @@ console.log("All good!");
 // Hint: Array.prototype.some might be useful in your solution :)
 
 function clanStats (clanName) {
-  // TODO: Implement this function.
-  // See if you can re-use a function or two from the previous exercise :)
+  var clan = Data.clans.find(propEq('name', clanName));
+  var clanId = clan.id;
+  var winCount = 0;
+  var strongWinCount = 0;
+
+  // for each game
+    // if winner is member of clan and loser is not, record game
+  
+
+  // get difference of scores for each game
+
+  
+
+  
+  console.log({clanId, winCount, strongWinCount});
 }
 
 // Helper function
-function isMemberOfClan (clanId) {
-  return function (playerId) {
-    return !! Data.memberships.find( mem =>
-      mem.player_id === playerId && mem.clan_id === clanId
-    );
-  }
+function isMemberOfClan (clanId, playerId) {
+  return !! Data.memberships.find(mem => {
+    return mem.player_id === playerId && mem.clan_id === clanId;
+  });
 }
+
+// function isMemberOfClan (clanId) {
+//   return function (playerId) {
+//     return !! Data.memberships.find( mem =>
+//       mem.player_id === playerId && mem.clan_id === clanId
+//     );
+//   }
+// }
 
 console.log("[Exercise #3]");
 
