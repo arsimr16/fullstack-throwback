@@ -121,23 +121,25 @@ console.log("All good!");
 function clanStats (clanName) {
   var clan = Data.clans.find(propEq('name', clanName));
   var clanId = clan.id;
-  var winCount = 0;
-  var strongWinCount = 0;
 
-  // for each game
-    // if winner is member of clan and loser is not, record game
+  var clanWins = Data.games.filter(game => {
+    var winner = game.player1_score === 100 ? game.player1_id : game.player2_id;
+    var loser = game.player1_score !== 100 ? game.player1_id : game.player2_id;
+    return isMemberOfClan(winner, clanId) && !isMemberOfClan(loser, clanId);
+  });
+
+  var strongWins = clanWins
+    .map(game => toPlayerScoreDifference(game))
+    .filter(amount => amount >= 35);
+
+  var winCount = clanWins.length;
+  var strongWinCount = strongWins.length;
   
-
-  // get difference of scores for each game
-
-  
-
-  
-  console.log({clanId, winCount, strongWinCount});
+  return {clanId, winCount, strongWinCount};
 }
 
 // Helper function
-function isMemberOfClan (clanId, playerId) {
+function isMemberOfClan (playerId, clanId) {
   return !! Data.memberships.find(mem => {
     return mem.player_id === playerId && mem.clan_id === clanId;
   });
