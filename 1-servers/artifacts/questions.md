@@ -1,6 +1,6 @@
 ## Q1. Why do the functions in helpers need to take a callback?
 
-<!-- Your answer here! -->
+Once we get the result, we need to do something with that result.
 
 ## Q2. How did you test the getAll function in `helpers/dogs.js`?
 
