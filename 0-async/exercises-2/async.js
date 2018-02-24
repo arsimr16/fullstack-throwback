@@ -4,8 +4,6 @@ function assert (actual, expected) {
   }
 }
 
-console.log("Delete this console log!")
-
 //
 // Exercise #1: Network Simulation
 //
@@ -18,6 +16,7 @@ console.log("Delete this console log!")
 // HINT: Feel free to copy/paste any functions you used in Core 4 Exercise!
 //
 
+/*
 console.log("[Async Exercise #1]")
 
 function playerStats (callback) {
@@ -48,6 +47,7 @@ playerStats(function (stats) {
   assert( stats.find( s => s.playerId === 13 ).winCount, 13 );
   console.log("[Async Exercise #1] All good!");
 });
+*/
 
 //
 // Exercise #2: Hard mode
@@ -74,12 +74,28 @@ playerStats(function (stats) {
 // NOTE: Completing this exercise with DataAPI.Callback is extra credit.
 //
 
-console.log("[Async Exercise #2]")
+console.log("[Async Exercise #2]");
 
 function playerStats2 (playerIds, callback) {
-  var API = DataAPI.Callback;
-  // var API = DataAPI.Promise;
-  // TODO: Implement this function
+  var API = DataAPI.Promise;
+
+  Promise.all(
+    playerIds.map(playerId => {
+      API.getPlayerGames(playerId)
+        .then(games => {
+          playerWins = games.filter(game => {
+            const winnerId = game.player1_score === 100 ? game.player1_id : game.player2_id;
+            return playerId === winnerId;
+          });
+          return [playerId, playerWins.length];
+        })
+        .then(results => {
+          API.getPlayerById(results[0]).then(player => {
+            console.log({playerId: player.id, playerName: player.name, winCount: results[1]});
+          });
+        });
+    }))
+    .then(results => console.log(results));
 }
 
 playerStats2([10,11,12,13], function (stats) {
