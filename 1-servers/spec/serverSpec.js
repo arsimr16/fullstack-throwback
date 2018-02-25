@@ -42,21 +42,21 @@ describe('server', function() {
       });
     });
 
-    xit('should indicate what type of data the response body contains', function(done) {
+    it('should indicate what type of data the response body contains', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         expect(response.headers).to.have.own.property('content-type', 'application/json');
         done();
       });
     });
 
-    xit('should send back parsable stringified JSON', function(done) {
+    it('should send back parsable stringified JSON', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         expect(JSON.parse.bind(this, body)).to.not.throw();
         done();
       });
     });
 
-    xit('should send back an array', function(done) {
+    it('should send back an array', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody).to.be.an('array');
@@ -64,7 +64,7 @@ describe('server', function() {
       });
     });
 
-    xit('should send an array containing dog objects', function(done) {
+    it('should send an array containing dog objects', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody).to.be.an('array');
@@ -73,7 +73,7 @@ describe('server', function() {
       });
     });
 
-    xit('should send an array containing dog objects that have name, breed, id', function(done) {
+    it('should send an array containing dog objects that have name, breed, id', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody).to.be.an('array');

@@ -7,11 +7,11 @@ var getAll = function(callback) {
     if (err) throw err;
     data = data.toString().split('\n');
     data.pop();
-    data.map(dog => {
+    data = data.map(dog => {
       dog = dog.split(', ');
       return {name: dog[0], breed: dog[1], id: dog[2]};
     });
-    callback(data);
+    callback(JSON.stringify(data));
   });
 }
 
@@ -22,7 +22,7 @@ var getOneById = function(id, callback) {
     data = data.toString().split('\n');
     let dog = data.find(result => result.includes(id));
     dog = dog.split(', ');
-    callback({name: dog[0], breed: dog[1], id: dog[2]});
+    callback(JSON.stringify({name: dog[0], breed: dog[1], id: dog[2]}));
   });
 }
 

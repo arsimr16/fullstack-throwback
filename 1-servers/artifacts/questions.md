@@ -16,7 +16,7 @@ They are testing that endpoints on the server are returning the correct status c
 
 ## Q5. Why do we need to set headers on a response? 
 
-<!-- Your answer here! -->
+To indicate what type of data the response contains
 
 ## Q6. Will the tests make requests to the literal url '/api/dogs/:id', or will it look slightly different? If different, how?
 

@@ -21,20 +21,23 @@ var server = http.createServer(function(request, response) {
 			console.log(err);
 		});
 
-		if (method === 'GET' && url === 'api/dogs') {
-			response.writeHead(200, {'Content-Type': 'application/json'});
-			response.end(dogs.getAll(results => console.log(results)));
-		} else if (method === 'GET' && url === 'api/dogs/:id') {
-			response.writeHead(200, {'Content-Type': 'application/json'});
+		if (method === 'GET' && url === '/api/dogs') {
+			response.writeHead(200, {'content-type': 'application/json'});
+			dogs.getAll(results => response.end(results));
+
+		} else if (method === 'GET' && url === '/api/dogs/:id') {
+			response.writeHead(200, {'content-type': 'application/json'});
 			// TODO: get id from GET request url
 			const id = 'r1-s1Q7rNA';
 			response.end(dogs.getOneById(id, results => console.log(results)));
+
 		} else if (method === 'POST' && url === '/api/dogs') {
-			response.writeHead(201, {'Content-Type': 'application/json'});
+			response.writeHead(201, {'content-type': 'application/json'});
 			// TODO: get name and breed from POST request body
 			const name = 'newDog';
 			const breed = 'newBreed';
 			response.end(dogs.addOne(name, breed, result => callback(result)));
+
 		} else {
 			const responseBody = {method, url, body};
 			response.end(JSON.stringify(responseBody));
