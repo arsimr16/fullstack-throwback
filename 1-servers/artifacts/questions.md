@@ -12,7 +12,7 @@ I added an endpoint on the server and hardcoded the arguments for the addOne fun
 
 ## Q4. What are the four non-pending tests in `spec/serverSpec.js` testing?
 
-<!-- Your answer here! -->
+They are testing that endpoints on the server are returning the correct status codes and responses
 
 ## Q5. Why do we need to set headers on a response? 
 
