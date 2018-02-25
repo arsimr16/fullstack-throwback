@@ -4,11 +4,11 @@ Once we get the result, we need to do something with that result.
 
 ## Q2. How did you test the getAll function in `helpers/dogs.js`?
 
-<!-- Your answer here! -->
+I couldn't run the file with node, so the only way to test it I could think of was to implement a route that called that function on the server and test that route with a Postman request.
 
 ## Q3. How did you test the addOne function in `helpers/dogs.js`?
 
-<!-- Your answer here! -->
+I added an endpoint on the server and hardcoded the arguments for the addOne function.
 
 ## Q4. What are the four non-pending tests in `spec/serverSpec.js` testing?
 

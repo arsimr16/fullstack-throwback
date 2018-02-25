@@ -3,27 +3,38 @@ var shortid = require('shortid');
 var dogDataFile = __dirname + '/../data/dogs.txt';
 
 var getAll = function(callback) {
-  // Your code here! This function should get all
-  // dogs in the data file as an array of objects.
-  // The objects should have the keys: name, breed,
-  // id with values from the dog data file
-
+  fs.readFile(dogDataFile, (err, data) => {
+    if (err) throw err;
+    data = data.toString().split('\n');
+    data.pop();
+    data.map(dog => {
+      dog = dog.split(', ');
+      return {name: dog[0], breed: dog[1], id: dog[2]};
+    });
+    callback(data);
+  });
 }
 
 
 var getOneById = function(id, callback) {
-  // Your code here! This function should get the one
-  // dog object with the matching id from the dog file.
-  // The object should have the keys: name, breed, id
-  // with appropriate values from the dog data file.
-
+  fs.readFile(dogDataFile, (err, data) => {
+    if (err) throw err;
+    data = data.toString().split('\n');
+    let dog = data.find(result => result.includes(id));
+    dog = dog.split(', ');
+    callback({name: dog[0], breed: dog[1], id: dog[2]});
+  });
 }
 
 var addOne = function(name, breed, callback) {
-  // Your code here! This function should add a
-  // dog with name, breed, and id (use the shortid module)
-  // to the dog data file
-  
+  const dog = `${name}, ${breed}, ${shortid.generate()}\n`
+  fs.open(dogDataFile, 'a', (err, fd) => {
+    if (err) throw err;
+    fs.write(fd, dog, err => {
+      if (err) throw err;
+      fs.close(fd, () => console.log('successfully wrote to file'));
+    });
+  });
 }
 
 module.exports.getAll = getAll;
