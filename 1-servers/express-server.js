@@ -15,10 +15,14 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
 app.get('/api/dogs', (req, res) => {
   dogs.getAll(results => {
-  	console.log(results);
+  	// console.log(results);
   	// res.json(results);
   	// res.type('application/json');
   	res.set('content-type', 'application/json');
   	res.send(results);
   });
+});
+
+app.get('/api/dogs/:id', (req, res) => {
+	dogs.getOneById(req.params.id, result => res.send(result));
 });

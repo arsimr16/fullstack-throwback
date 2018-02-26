@@ -36,7 +36,7 @@ The default content type is text so it needs to be changed to application/json
 
 ## Q10. Is there an easier way to handle the :id in express? (hint: look up route parameters)
 
-<!-- Your answer here! -->
+Yes, the built-in req.params is able to recognize anything in the url that starts with : as a variable.
 
 # Q11. How do you think the body-parser module works? 
 
