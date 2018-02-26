@@ -32,9 +32,8 @@ var server = http.createServer(function(request, response) {
 
 		} else if (method === 'POST' && url.includes('/api/dogs')) {
 			response.writeHead(201, {'content-type': 'application/json'});
-			// TODO: get name and breed from POST request body
-			const name = 'newDog';
-			const breed = 'newBreed';
+			body = JSON.parse(body);
+			const {name, breed} = body;
 			response.end(dogs.addOne(name, breed, result => callback(result)));
 
 		} else {

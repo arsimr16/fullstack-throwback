@@ -20,15 +20,15 @@ To indicate what type of data the response contains
 
 ## Q6. Will the tests make requests to the literal url '/api/dogs/:id', or will it look slightly different? If different, how?
 
-<!-- Your answer here! -->
+The ':id' part is a variable and it will include the id of a dog.
 
 ## Q7. How can you tell when a request is made to /api/dogs/:id instead of /api/dogs, and how will you access the id? 
 
-<!-- Your answer here! -->
+I can use a regular expression to see if there is anything after '/api/dogs/' and if there is, I can capture that in a variable.
 
 ## Q8. What should you expect to be on the request body for a POST To /api/dogs? How do you access the request body in bare node?
 
-<!-- Your answer here! -->
+There should be a JSON object with a name and breed property.  To access the request body, you need to turn the buffer into a string.
 
 ## Q9. Do you need to write your own headers for this route? Why or why not?
 
