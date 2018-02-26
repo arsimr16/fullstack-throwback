@@ -92,14 +92,14 @@ describe('server', function() {
       });
     });
 
-    xit('should send back parsable stringified JSON', function(done) {
+    it('should send back parsable stringified JSON', function(done) {
       request('http://127.0.0.1:3000/api/dogs/r1-s1Q7rNA', function(error, response, body) {
         expect(JSON.parse.bind(this, body)).to.not.throw();
         done();
       });
     });
 
-    xit('should send back an object', function(done) {
+    it('should send back an object', function(done) {
       request('http://127.0.0.1:3000/api/dogs/r1-s1Q7rNA', function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody).to.be.an('object');
@@ -107,7 +107,7 @@ describe('server', function() {
       });
     });
 
-    xit('should send a dog object that has name, breed, id', function(done) {
+    it('should send a dog object that has name, breed, id', function(done) {
       request('http://127.0.0.1:3000/api/dogs/r1-s1Q7rNA', function(error, response, body) {
         var parsedBody = JSON.parse(body);
         expect(parsedBody).to.be.an('object');
@@ -116,7 +116,7 @@ describe('server', function() {
       });
     });
 
-    xit('should respond to requests for nonexistent dogs with a 404', function(done) {
+    it('should respond to requests for nonexistent dogs with a 404', function(done) {
       request('http://127.0.0.1:3000/api/dogs/fakeid123', function(error, response, body) {
         expect(response.statusCode).to.equal(404);
         done();
@@ -141,7 +141,7 @@ describe('server', function() {
       });
     });
 
-    xit('should respond with dogs that were previously posted', function(done) {
+    it('should respond with dogs that were previously posted', function(done) {
       var requestParams = {
         method: 'POST',
         uri: 'http://127.0.0.1:3000/api/dogs',

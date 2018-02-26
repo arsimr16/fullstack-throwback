@@ -21,6 +21,10 @@ var getOneById = function(id, callback) {
     if (err) throw err;
     data = data.toString().split('\n');
     let dog = data.find(result => result.includes(id));
+    // if (!dog) {
+    //   response.statusCode(404);
+    //   callback();    
+    // }
     dog = dog.split(', ');
     callback(JSON.stringify({name: dog[0], breed: dog[1], id: dog[2]}));
   });
