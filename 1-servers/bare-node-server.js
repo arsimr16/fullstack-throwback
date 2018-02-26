@@ -1,5 +1,6 @@
 var http = require('http');
 var dogs = require('./helpers/dogs.js');
+var fs = require('fs');
 
 /*
 Your server here! If you need help getting started,
@@ -26,7 +27,7 @@ var server = http.createServer(function(request, response) {
 			const id = url.match(/[^/]+$/)[0];
 			dogs.getOneById(id, results => response.end(results));
 
-		} else if (method === 'GET' && url === '/api/dogs') {
+		} else if (method === 'GET' && url.includes('/api/dogs')) {
 			response.writeHead(200, {'content-type': 'application/json'});
 			dogs.getAll(results => response.end(results));
 
@@ -36,9 +37,23 @@ var server = http.createServer(function(request, response) {
 			const {name, breed} = body;
 			response.end(dogs.addOne(name, breed, result => callback(result)));
 
+		// } else if (method === 'GET' && url.includes('/style.css')) {
+		// 	fs.readFile('index.html', function (err, data) {
+	 //      response.writeHead(200, {'Content-Type': 'text/css'});
+	 //      response.write(data);
+	 //      response.end();
+	 //   	});
+
+		// } else if (method === 'GET' && url === '/') {
+		// 	fs.readFile('style.css', function (err, data) {
+	 //      response.writeHead(200, {'Content-Type': 'text/html'});
+	 //      response.write(data);
+	 //      response.end();
+	 //   	});
+
 		} else {
-			const responseBody = {method, url, body};
-			response.end(JSON.stringify(responseBody));
+			response.statusCode = 404;
+			response.end();
 		}
 	})
 });
