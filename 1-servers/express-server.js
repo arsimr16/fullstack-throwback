@@ -12,3 +12,13 @@ const app = express();
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
+
+app.get('/api/dogs', (req, res) => {
+  dogs.getAll(results => {
+  	console.log(results);
+  	// res.json(results);
+  	// res.type('application/json');
+  	res.set('content-type', 'application/json');
+  	res.send(results);
+  });
+});

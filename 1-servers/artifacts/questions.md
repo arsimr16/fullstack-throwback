@@ -32,7 +32,7 @@ There should be a JSON object with a name and breed property.  To access the req
 
 ## Q9. Do you need to write your own headers for this route? Why or why not?
 
-<!-- Your answer here! -->
+The default content type is text so it needs to be changed to application/json
 
 ## Q10. Is there an easier way to handle the :id in express? (hint: look up route parameters)
 

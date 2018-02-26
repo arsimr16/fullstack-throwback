@@ -84,7 +84,7 @@ describe('server', function() {
     });
   });
 
-  describe('GET requests to /api/dogs/:id', function() {
+  xdescribe('GET requests to /api/dogs/:id', function() {
     it('should respond with a 200 status code', function(done) {
       request('http://127.0.0.1:3000/api/dogs/r1-s1Q7rNA', function(error, response, body) {
         expect(response.statusCode).to.equal(200);
@@ -116,7 +116,7 @@ describe('server', function() {
       });
     });
 
-    xit('should respond to requests for nonexistent dogs with a 404', function(done) {
+    it('should respond to requests for nonexistent dogs with a 404', function(done) {
       request('http://127.0.0.1:3000/api/dogs/fakeid123', function(error, response, body) {
         expect(response.statusCode).to.equal(404);
         done();
@@ -124,7 +124,7 @@ describe('server', function() {
     });
   });
 
-  describe('POST requests to /api/dogs', function() {
+  xdescribe('POST requests to /api/dogs', function() {
     it('should accept POST requests to /api/dogs', function(done) {
       var requestParams = {
         method: 'POST',
