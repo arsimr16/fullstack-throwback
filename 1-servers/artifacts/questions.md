@@ -40,11 +40,11 @@ Yes, the built-in req.params is able to recognize anything in the url that start
 
 # Q11. How do you think the body-parser module works? 
 
-<!-- Your answer here! -->
+It allows express to parse the body of an HTTP request.  I assume it works like a JSON parser.  It knows that the body starts after a blank line.
 
 # Q12. Which body-parser method did you use? Why are there different types of body-parsers? 
 
-<!-- Your answer here! -->
+I used the body-parser json method because I knew that the body contained JSON data.  There are different types of body-parsers to use when you expect the data on the req body to have different types.
 
 # Q13. What major differences do you see between bare node and express? Which do you prefer and why?
 

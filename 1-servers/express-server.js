@@ -1,5 +1,6 @@
 var express = require('express');
 var dogs = require('./helpers/dogs.js');
+var bodyParser = require('body-parser');
 
 /*
 Your server here! If you need help getting started,
@@ -8,6 +9,8 @@ https://expressjs.com/en/starter/hello-world.html
 */
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
@@ -25,4 +28,8 @@ app.get('/api/dogs', (req, res) => {
 
 app.get('/api/dogs/:id', (req, res) => {
 	dogs.getOneById(req.params.id, result => res.send(result));
+});
+
+app.post('/api/dogs', (req, res) => {
+	dogs.addOne(req.body.name, req.body.breed, () => res.sendStatus(201));
 });

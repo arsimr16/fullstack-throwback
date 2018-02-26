@@ -37,6 +37,7 @@ var addOne = function(name, breed, callback) {
     fs.write(fd, dog, err => {
       if (err) throw err;
       fs.close(fd, () => console.log('successfully wrote to file'));
+      callback();
     });
   });
 }

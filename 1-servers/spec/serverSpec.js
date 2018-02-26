@@ -42,7 +42,7 @@ describe('server', function() {
       });
     });
 
-    it('should indicate what type of data the response body contains', function(done) {
+    xit('should indicate what type of data the response body contains', function(done) {
       request('http://127.0.0.1:3000/api/dogs', function(error, response, body) {
         expect(response.headers).to.have.own.property('content-type', 'application/json');
         done();
@@ -124,7 +124,7 @@ describe('server', function() {
     });
   });
 
-  xdescribe('POST requests to /api/dogs', function() {
+  describe('POST requests to /api/dogs', function() {
     it('should accept POST requests to /api/dogs', function(done) {
       var requestParams = {
         method: 'POST',
