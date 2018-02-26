@@ -48,22 +48,22 @@ I used the body-parser json method because I knew that the body contained JSON d
 
 # Q13. What major differences do you see between bare node and express? Which do you prefer and why?
 
-<!-- Your answer here! -->
+Express is an abstraction layer on top of bare node.  They basically do all the same things, but express hides a lot of the boiler plate code.  Express is to node as jQuery is to manipulating the DOM with vanilla JS.  I prefer Express because it's easier to use and requires a lot less code (less chances to mess something up).
 
 # Q14. When do you need to use req.on('data') and why?
 
-<!-- Your answer here! -->
+req.on('data') is an event handler and triggers some action after some asynchronous code has returned results.
 
 # Q15. What happens if the client (or the test or postman) doesn't get a response to a request?
 
-<!-- Your answer here! -->
+There is a request timeout after some amount of time (2000 milliseconds for the tests).
 
 # Q16. What's the difference between res.end, res.send, and res.json?
 
-<!-- Your answer here! -->
+res.end in bare node signifies the end of a server handling a request.  You can write the response beforehand or as an argument to res.end.  res.send the equivalent used in express.  res.json is like res.send, but it automatically sets the content-type to application/json.
 
 # Q17. We didn't handle static file serving in the bare minimum requirements. What's an example of a static file, and what does it mean to "serve" it?
 
-<!-- Your answer here! -->
+static files or static assets are files like the index.html or style.css.  Serving them means sending them in a response to a GET request so that they can be parsed and displayed in the browser.
 
 
